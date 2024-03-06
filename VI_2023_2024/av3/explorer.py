@@ -101,7 +101,7 @@ if __name__ == '__main__':
 
     person = tuple(map(int, input().split()))
     house = tuple(map(int, input().split()))
-    problem = Kukji(person, house)
+    problem = Explorer(person, house)
     node = breadth_first_graph_search(problem)
     if node is not None:
         print(node.solution())
