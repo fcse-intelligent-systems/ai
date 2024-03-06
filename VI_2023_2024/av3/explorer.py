@@ -1,7 +1,7 @@
 from searching_framework import Problem, breadth_first_graph_search
 
 
-class Kukji(Problem):
+class Explorer(Problem):
     def __init__(self, person, house):  # TODO
         super().__init__((person, (2, 5, -1), (5, 0, +1)))
         self.house = house
