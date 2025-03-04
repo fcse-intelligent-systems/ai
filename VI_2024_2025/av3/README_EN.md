@@ -1,7 +1,7 @@
-﻿# Аудиториска вежба 3 - Неинформирано пребарување
+﻿# Auditory exercise 3 - Uninformed search
 
 
-## Пример - Два сада
+## Example - Two jars
 
 Given two jars **J0** and **J1**, having capacities of **C0** and **C1** liters, accordingly. 
 Define list of actions that will bring the system to a state in which **J0** has **G0** liters, and **J1** has **G1** liters.
