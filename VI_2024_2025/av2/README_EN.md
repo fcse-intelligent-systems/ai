@@ -18,11 +18,11 @@ Define a class for an Agent that stores its position (x and y coordinates) in sp
 Using list comprehension, given a matrix of numbers, change each element so that it is multiplied by 2. Each element of the matrix is ​​read from the keyboard by first reading N and M (number of rows and columns) and then in each row the elements are read, separated by a space.
 
 Example input:
-4
-4
-1 2 3 4
-1 2 3 4
-1 2 3 4
+4\
+4\
+1 2 3 4\
+1 2 3 4\
+1 2 3 4\
 1 2 3 4
 
 Output:
@@ -33,11 +33,11 @@ Output:
 Using list comprehension, given a matrix composed of numbers, change each element so that if it belongs to the upper half (the row index is between 0 and n/2) it should be multiplied by 2 and if it belongs to the lower half it should be multiplied by 3. Each element of the matrix is ​​read from the keyboard so that first N and M (number of rows and columns) are read and then the elements separated by a space are read in each row.
 
 Example input:
-4
-4
-1 2 3 4
-1 2 3 4
-1 2 3 4
+4\
+4\
+1 2 3 4\
+1 2 3 4\
+1 2 3 4\
 1 2 3 4
 
 Output:
