@@ -1,5 +1,6 @@
 ﻿# Аудиториска вежба 3 - Неинформирано пребарување
 
+For English version, click [here](README_EN.md).
 
 ## Пример - Два сада
 
