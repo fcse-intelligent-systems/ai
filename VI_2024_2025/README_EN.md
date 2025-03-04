@@ -1,15 +1,13 @@
-# Вештачка интелигенција
+# Artificial Intelligence
 
-For English version, click [here](README_EN.md).
-
-Репозиториум за предметот Вештачка интелигенција. 
+Repository for the course Artificial Intelligence. 
 
 ### Поставки 
-- Инсталација на Python3: https://www.python.org/downloads/ 
-- PyCharm околина за развој: https://www.jetbrains.com/pycharm/ 
-- PyCharm debugging туторијал: https://www.youtube.com/watch?v=sRGpvbhOhQs
+- Python3 installation: https://www.python.org/downloads/ 
+- PyCharm IDE: https://www.jetbrains.com/pycharm/ 
+- PyCharm debugging tutorial: https://www.youtube.com/watch?v=sRGpvbhOhQs
 
-## Интересни линкови:
+## Integersting links:
 - [Multi-Agent Hide and Seek](https://www.youtube.com/watch?v=kopoLzvh5jY)
 - [Meet Sophia, World's First AI Humanoid Robot](https://www.youtube.com/watch?v=Sq36J9pNaEo)
 - [How computers learn to recognize objects instantly](https://www.youtube.com/watch?v=Cgxsv1riJhI)
