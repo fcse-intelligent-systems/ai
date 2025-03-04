@@ -2,7 +2,7 @@
 
 Repository for the course Artificial Intelligence. 
 
-### Поставки 
+### Settings 
 - Python3 installation: https://www.python.org/downloads/ 
 - PyCharm IDE: https://www.jetbrains.com/pycharm/ 
 - PyCharm debugging tutorial: https://www.youtube.com/watch?v=sRGpvbhOhQs
