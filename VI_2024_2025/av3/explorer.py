@@ -1,111 +1,127 @@
-from searching_framework import Problem, breadth_first_graph_search
+from searching_framework.utils import Problem
+from searching_framework.uninformed_search import *
 
 
 class Explorer(Problem):
-    def __init__(self, person, house):  # TODO
-        super().__init__((person, (2, 5, -1), (5, 0, +1)))
-        self.house = house
-        self.rows = 6
-        self.cols = 8
-
-    def goal_test(self, state):
-        person = state[0]
-        return person == house
+    def __init__(self, initial, goal=None):
+        super().__init__(initial, goal)
+        self.grid_size = [8, 6]
 
     def successor(self, state):
-        neighbors = dict()
+        """За дадена состојба, врати речник од парови {акција : состојба}
+        достапни од оваа состојба. Ако има многу следбеници, употребете
+        итератор кој би ги генерирал следбениците еден по еден, наместо да
+        ги генерирате сите одеднаш.
 
-        # # rez = self.move_right(state)
-        # rez = self.move(state, (+1,0))
-        # if rez != None: neighbors["Right"] = rez
-        #
-        # rez = self.move(state, (-1,0))
-        # if rez != None: neighbors["Left"] = rez
-        #
-        # rez = self.move(state, (0,+1))
-        # if rez != None: neighbors["Up"] = rez
-        #
-        # rez = self.move(state, (0,-1))
-        # if rez != None: neighbors["Down"] = rez
+        :param state: дадена состојба
+        :return:  речник од парови {акција : состојба} достапни од оваа
+                  состојба
+        :rtype: dict
+        """
+        successors = dict()
 
-        # actions = ("Right", "Left", "Up", "Down")
-        # directions = ((+1, 0), (-1, 0), (0, +1), (0, -1))
-        # for i in range(0, len(actions)):
-        #     action = actions[i]
-        #     direction = directions[i]
-        #     rez = self.move(state, direction)
-        #     if rez != None: neighbors[action] = rez
+        man_x = state[0]
+        man_y = state[1]
+        obstacle1 = [state[2], state[3], state[4]]
+        obstacle2 = [state[5], state[6], state[7]]
+        max_x = self.grid_size[0]
+        max_y = self.grid_size[1]
 
-        actions = ("Right", "Left", "Up", "Down")
-        directions = ((+1, 0), (-1, 0), (0, +1), (0, -1))
-        for action, direction in zip(actions, directions):
-            rez = self.move(state, direction)
-            if rez is not None: neighbors[action] = rez
+        if obstacle1[2] == 0:  # up
+            if obstacle1[1] == max_y - 1:
+                obstacle1[2] = 1
+                obstacle1[1] -= 1
+            else:
+                obstacle1[1] += 1
+        else:  # down
+            if obstacle1[1] == 0:
+                obstacle1[2] = 0
+                obstacle1[1] += 1
+            else:
+                obstacle1[1] -= 1
 
-        return neighbors
+        if obstacle2[2] == 0:  # up
+            if obstacle2[1] == max_y - 1:
+                obstacle2[2] = 1
+                obstacle2[1] -= 1
+            else:
+                obstacle2[1] += 1
+        else:  # down
+            if obstacle2[1] == 0:
+                obstacle2[2] = 0
+                obstacle2[1] += 1
+            else:
+                obstacle2[1] -= 1
+
+        # obstacle1_pos = [obstacle1[0], obstacle1[1]]
+        # obstacle2_pos = [obstacle2[0], obstacle2[1]]
+        obstacles = [[obstacle1[0], obstacle1[1]], [obstacle2[0], obstacle2[1]]]
+
+        if man_x < max_x - 1 and [man_x + 1, man_y] not in obstacles:  # right
+            successors['Right'] = (man_x + 1, man_y,
+                                   obstacle1[0], obstacle1[1], obstacle1[2],
+                                   obstacle2[0], obstacle2[1], obstacle2[2])
+
+        if man_x > 0 and [man_x - 1, man_y] not in obstacles:  # left
+            successors['Left'] = (man_x - 1, man_y,
+                                   obstacle1[0], obstacle1[1], obstacle1[2],
+                                   obstacle2[0], obstacle2[1], obstacle2[2])
+
+        if man_y < max_y - 1 and [man_x, man_y + 1] not in obstacles:  # up
+            successors['Up'] = (man_x, man_y + 1,
+                                   obstacle1[0], obstacle1[1], obstacle1[2],
+                                   obstacle2[0], obstacle2[1], obstacle2[2])
+
+        if man_y > 0 and [man_x, man_y - 1] not in obstacles:  # down
+            successors['Down'] = (man_x, man_y - 1,
+                                   obstacle1[0], obstacle1[1], obstacle1[2],
+                                   obstacle2[0], obstacle2[1], obstacle2[2])
+
+        return successors
 
     def actions(self, state):
+        """За дадена состојба state, врати листа од сите акции што може да
+        се применат над таа состојба
+
+        :param state: дадена состојба
+        :return: листа на акции
+        :rtype: list
+        """
         return self.successor(state).keys()
 
     def result(self, state, action):
+        """За дадена состојба state и акција action, врати ја состојбата
+        што се добива со примена на акцијата над состојбата
+
+        :param state: дадена состојба
+        :param action: дадена акција
+        :return: резултантна состојба
+        """
         return self.successor(state)[action]
 
-    # def move_right(self, state):
-    def move(self, state, direction):
-        # person = self.move_person_right(state[0])
-        person = self.move_person_dir(state[0], direction)
-        block1 = self.move_block(state[1])
-        block2 = self.move_block(state[2])
+    def goal_test(self, state):
+        """Врати True ако state е целна состојба. Даденава имплементација
+        на методот директно ја споредува state со self.goal, како што е
+        специфицирана во конструкторот. Имплементирајте го овој метод ако
+        проверката со една целна состојба self.goal не е доволна.
 
-        new_state = (person, block1, block2)
-
-        if self.is_valid_state(new_state):
-            return new_state
-        else:
-            return None
-        # i.e.:
-        # return self.is_valid_state(new_state) and new_state or None
-        # """needs valid to be True to return new_state, or else it will return None"""
-        # """check `print(False and "something" or "something else")`"""
-        # """and `print(True and "something" or "something else")`"""
-
-    # def move_person_right(self, person):
-    def move_person_dir(self, person, direction):
-        "direction is tuple: (amount_move_x, amount_move_y)"
-        person = list(person)
-        person[0] += direction[0]  # person[0] += 1 # for `def move_person_right`
-        person[1] += direction[1]
-        return tuple(person)
-
-    def move_block(self, block):
-        x, y, n = block
-        y += n
-        if y < 0 or y >= self.rows:
-            n *= -1
-            y += 2 * n
-        return (x, y, n)
-
-    def is_valid_state(self, state):
-        person, block1, block2 = state
-        px, py = person
-        return 0 <= px < self.cols and \
-            0 <= py < self.rows and \
-            person != block1[:2] and person != block2[:2]
+        :param state: дадена состојба
+        :return: дали дадената состојба е целна состојба
+        :rtype: bool
+        """
+        position = (state[0], state[1])
+        return position == self.goal
 
 
-""" example:
-0 2
-7 4
-"""
 if __name__ == '__main__':
+    goal_state = (7, 4)
+    initial_state = (0, 2)
+    obstacle_1 = (2, 5, 1)  # down
+    obstacle_2 = (5, 0, 0)  # up
 
-    person = tuple(map(int, input().split()))
-    house = tuple(map(int, input().split()))
-    problem = Explorer(person, house)
-    node = breadth_first_graph_search(problem)
-    if node is not None:
-        print(node.solution())
-        print(node.solve())
-        print(node.path())
-    else:
-        print("Nema Resenie")
+    explorer = Explorer((initial_state[0], initial_state[1],
+                         obstacle_1[0], obstacle_1[1], obstacle_1[2],
+                         obstacle_2[0], obstacle_2[1], obstacle_2[2]), goal_state)
+
+    print(breadth_first_graph_search(explorer).solution())
+    print(breadth_first_graph_search(explorer).solve())
