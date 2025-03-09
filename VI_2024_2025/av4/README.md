@@ -1,5 +1,6 @@
 ﻿# Аудиториска вежба 4 - Информирано пребарување
 
+For English version, click [here](README_EN.md)
 
 ## Пример - Сложувалка
 
