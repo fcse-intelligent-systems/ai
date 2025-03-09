@@ -117,9 +117,7 @@ Constraints: If left alone (without the farmer):
 - The goat eats the cabbage
 - The wolf eats the goat
 
-Вашиот код треба да има само еден повик на функција за приказ на стандарден излез (print) со кој ќе ја вратите секвенцата од позиции на актерите која одговара на секвенцата на движења со која сите актери ќе бидат пренесени на западната страна на реката. 
-
-Your code should have one function call that prints the output on the standard screen - it should print the movement sequence of the atoms from their initial position to a goal position on the table. 
+Your code should have one function call that prints the output on the standard screen - it should print the sequence of movements so that all actors will be on the west side of the river. 
 Use informed search. Implement a heuristic function that would be permissible for this problem.
 
 
